@@ -1,0 +1,52 @@
+<%- include ('../../header.ejs') %>
+
+    <section class="dashboard-wrap mtb-40">
+        <div class="container">
+            <div class="body-content">
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-9">
+                        <div class="dash-right">
+                            <div class="dash-header">
+                                <div class="dash-title">
+                                    <h1>Edit Category of <%= categoryedit._id %></h1>
+                                </div>
+                                
+                            </div>
+                            <form method="post" action="/categoryupdate/<%= categoryedit._id %>">
+                                <!-- <div class="form-group form-row">
+                                    <label class="col-md-3 required">Upload Image *</label>
+                                    <div class="col-md-9">
+                                        <input type="file" name="filename" class="form-control" formControlName="image">
+                                    </div>
+                                </div> -->
+                                <div class="form-group form-row">
+                                    <label class="col-md-3 required">Category Title *</label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" name="categoryname" value="<%= categoryedit.categoryname %>"  required>
+                                    </div>
+                                </div>
+                              
+                                
+    
+                                <div class="form-group form-row">
+                                    <label class="col-md-3"></label>
+                                    <div class="col-md-9">
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                    </div>
+                                </div>
+    
+    
+    
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        
+    </section>
+
+    <%- include ('../../footer.ejs') %>

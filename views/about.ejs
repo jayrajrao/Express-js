@@ -1,0 +1,52 @@
+<%- include('header.ejs') %>
+
+<br>
+<br>
+<br>
+<br>
+<section class="cmspage mtb-40">
+    <div class="container"><br>
+      <h style="font-size: 18; top: 85%;"><b>About E-commerce:</b> <br>(electronic commerce) is the activity of
+         electronically buying or selling of products on online services or over the Internet. E-commerce draws on
+          technologies such as mobile commerce, electronic funds transfer, supply chain management, Internet marketing,
+           online transaction processing, electronic data interchange (EDI), inventory management systems, and automated 
+           data collection systems. E-commerce is in turn driven by the technological advances of the semiconductor
+            industry, and is the largest sector of the electronics industry.<br>
+    
+        Defining e-commerce:<br>
+        The term was coined and first employed by Dr. Robert Jacobson, Principal Consultant to the
+         California State Assembly's Utilities & Commerce Committee, in the title and text of California's 
+         Electronic Commerce Act, carried by the late Committee Chairwoman Gwen Moore (D-L.A.) and enacted in
+          1984.<br>
+        
+        E-commerce typically uses the web for at least a part of a transaction's life cycle although
+         it may also use other technologies such as e-mail. Typical e-commerce transactions include the
+          purchase of products (such as books from Amazon) or services (such as music downloads in the form
+           of digital distribution such as iTunes Store).There are three areas of e-commerce: online retailing,
+            electronic markets, and online auctions. E-commerce is supported by electronic business. The 
+            existence value of e-commerce is to allow consumers to shop online and pay online through the
+             Internet, saving the time and space of customers and enterprises, greatly improving transaction efficiency, especially for busy office workers, but also saving a lot of valuable time.<br>
+        
+        E-commerce businesses may also employ some or all of the following:<br>
+        
+        Online shopping for retail sales direct to consumers via web sites and mobile apps, and conversational commerce via live chat, chatbots, and voice assistants;<br>
+        Providing or participating in online marketplaces, which process third-party business-to-consumer (B2C) or consumer-to-consumer (C2C) sales;<br>
+        Business-to-business (B2B) buying and selling;<br>
+        Gathering and using demographic data through web contacts and social media;<br>
+        B2B electronic data interchange;<br>
+        Marketing to prospective and established customers by e-mail or fax (for example, with newsletters);
+        Engaging in pretail for launching new products and services;<br>
+        Online financial exchanges for currency exchanges or trading purposes.<br>
+        There are five essential categories of E-commerce:</h1>
+      <div class="page-desc">
+      <% ab.forEach((a)=>{ %>
+        <p><%= a.description %>
+            </p>
+      <% }) %>
+
+        </div>
+    </div>
+</section>
+
+
+<%- include('footer.ejs') %>

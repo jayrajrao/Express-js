@@ -1,0 +1,43 @@
+<%- include('./../views/header.ejs') %>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" 
+integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" 
+integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<br>
+<div class="--container-end--" style="background-color:indianred">
+	<div class="container" >
+		<img src="\images\s-tsuchiya-2UpH_leC9vc-unsplash.jpg" style="width: 100% ">
+		</div><div><h1 style=" padding-left: 4em; top: 85%; position: absolute; color: white;">WELCOME TO MY PROJECT<br>
+      <small class="text-muted"><button type="button" class="btn btn btn-outline-info"><a href="/contact">CONTACT US </button></a></small></h1>
+      </div>
+	</div>
+</div>
+
+
+
+
+		
+<div class="--container-end--"style="background-color:#e83f52">
+<div class="container" >
+ 
+    <% d.forEach((item)=>{ %>
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <a href="/blogdetail/<%= item._id %>">
+            <img src="<%= item.image.url %>" style="width: 90%">
+            <h3><%= item.title %></h3>
+          </a>
+          <p><%= item.description.slice(0,90) %></p>
+          </div>
+    <% }) %>
+  </div><!--container-end-->
+</div><!--container-fluid-->
+</div>
+</div>
+
+
+  
+  <%- include('footer.ejs') %>
+
+	

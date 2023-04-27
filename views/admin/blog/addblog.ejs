@@ -1,0 +1,177 @@
+<%- include('../../header.ejs') %>
+<br />
+<script
+  src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+  crossorigin="anonymous"
+></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+  integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+  crossorigin="anonymous"
+></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+  integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+  crossorigin="anonymous"
+></script>
+
+<!--icon links -->
+<link
+  rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<br />
+
+<section class="dashboard-wrap mtb-40">
+  <div class="container">
+    <div class="body-content">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="dash-left">
+            <ul>
+              <li class="active"><a href="/admin/dashboard">Dashboard</a></li>
+              <li><a href="/admin/blog" class="active">Blogs</a></li>
+              <li><a href="/admin/categorydisplay">Categories</a></li>
+              <li><a href="/admin/contactdisplay">Contact</a></li>
+              <li><a href="/admin/about">About</a></li>
+              <li><a href="/logout">Logout</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div class="dash-right">
+            <div class="dash-header">
+              <div class="dash-title">
+                <h1>Blogs</h1>
+              </div>
+              <div class="dash-nav">
+                <!-- button trigger -->
+                <button
+                  type="button"
+                  class="btn btn-sucess"
+                  data-toggle="modal"
+                  data-target="#exampleModal"
+                >
+                  Add Blog
+                </button>
+              </div>
+            </div>
+            <table class="table table-bordered table-striped">
+              <tr>
+                <th>SN.NO</th>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Action</th>
+              </tr>
+
+              <tr>
+                <% d.forEach((b)=>{ %>
+                <td><%= b._id %></td>
+                <td><%= b.title %></td>
+                <td><%= b.description %></td>
+                <td>
+                  <a href="/admin/blogview/<%= b._id %>">
+                    <span class="glyphicon glyphicon-eye-open"></span>
+                  </a>
+                  <a href="/admin/blogedit/<%= b._id %>">
+                    <span class="glyphicon glyphicon-edit"></span>
+                  </a>
+                  <a href="/admin/blogdelete/<%= b._id %>">
+                    <span class="glyphicon glyphicon-trash"></span>
+                  </a>
+                </td>
+              </tr>
+              <% }) %>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal -->
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form method="post" action="/bloginsert">
+            <!-- <div class="form-group form-row">
+                    <label class="col-md-3 required">Upload Image *</label>
+                    <div class="col-md-9">
+                      <input type="file"  name="filename" class="form-control" formControlName="image">
+                    </div>
+                </div> -->
+            <div class="form-group form-row">
+              <label class="col-md-3 required">Title *</label>
+              <div class="col-md-9">
+                <input
+                  type="text"
+                  name="title"
+                  class="form-control"
+                  placeholder="Title"
+                  required
+                />
+              </div>
+            </div>
+            <!-- <div class="form-group form-row">
+                  <label class="col-md-3">Upload Image</label>
+                  <div class="col-md-9">
+                    <input type="file" id="image" />
+                  </div>
+                </div> -->
+            <div class="form-group form-row">
+              <label class="col-md-3 required">Description *</label>
+              <div class="col-md-9">
+                <textarea
+                  name="description"
+                  rows="5"
+                  class="form-control"
+                  placeholder="Description"
+                  required
+                ></textarea>
+              </div>
+            </div>
+            <!-- <div class="form-group form-row">
+                    <label class="col-md-3 required">image *</label>
+                    <div class="col-md-9">
+                     <input type="file" name="blogimage">
+                    </div>
+                </div> -->
+            <div class="form-group form-row">
+              <label class="col-md-3"></label>
+              <div class="col-md-9">
+                <button type="submit" class="btn btn-secondary">submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+              
+  </div>
+</section>
+
+<%- include('../../footer.ejs') %>

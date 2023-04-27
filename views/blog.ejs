@@ -1,0 +1,33 @@
+<%- include('./../views/header.ejs') %>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+  <div class="container-fluid " style="background-color:indianred">
+    <div class="container">
+    <div class="row">
+  <div class="col-md-12">
+    <div class="blog-box">
+      <% d.forEach((item)=>{ %>
+      <img src="<%= item.image.url %> " width="400" height="600" alt="blog1" />
+
+      <h3 style="font-weight: 500;"><%= item.title %></h3>
+      <p></p>
+      <p style="color: black;  font: 1.2em sans-serif;"><%= item.description.slice(0,90) %></p>
+      <a href="/blogdetail/<%= item._id %>" class="btn btn-danger">Read more...</a>
+      <% }) %>
+      <br>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<br>
+
+  
+
+<%- include('footer.ejs') %>

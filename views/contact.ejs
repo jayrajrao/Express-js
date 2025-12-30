@@ -1,0 +1,60 @@
+<%- include('header.ejs') %>
+
+<!-- ================= CONTACT HERO ================= -->
+<section class="contact-hero">
+  <div class="container text-center">
+    <span class="contact-badge">📩 Get in Touch</span>
+    <h1 class="contact-title">Contact Me</h1>
+    <p class="contact-subtitle">
+      Have a question, feedback, or collaboration idea?
+      Feel free to reach out.
+    </p>
+  </div>
+</section>
+
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row justify-content-center">
+
+      <div class="col-md-7">
+        <div class="card border-0 shadow-sm rounded-4 p-4">
+
+          <h2 class="fw-bold mb-3 text-center">Contact Me</h2>
+          <p class="text-muted text-center mb-4">
+            Have a question or feedback? Feel free to reach out.
+          </p>
+
+          <form method="post" action="/contact">
+
+            <div class="mb-3">
+              <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+            </div>
+
+            <div class="mb-3">
+              <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+            </div>
+
+            <div class="mb-3">
+              <input type="text" name="phone" class="form-control" placeholder="Phone (optional)">
+            </div>
+
+            <div class="mb-4">
+              <textarea name="message" rows="4" class="form-control" placeholder="Your Message" required></textarea>
+            </div>
+
+            <div class="d-grid">
+              <button class="btn btn-primary btn-lg">
+                Send Message
+              </button>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<%- include('footer.ejs') %>

@@ -1,0 +1,82 @@
+<%- include('../../header.ejs') %>
+<%- include('../../partials/messages.ejs') %>
+
+<section class="dashboard-wrap mtb-40" style="padding-top:120px;">
+  <div class="container">
+    <div class="body-content">
+      <div class="row">
+
+        <!-- LEFT SIDEBAR -->
+        <div class="col-md-3">
+          <div class="dash-left">
+            <ul>
+              <li><a href="/admin/dashboard">Dashboard</a></li>
+              <li class="active"><a href="/admin/blogdisplay">Blogs</a></li>
+              <li><a href="/admin/categorydisplay">Categories</a></li>
+              <li><a href="/admin/contactview">Contact</a></li>
+              <li><a href="/admin/aboutus">About</a></li>
+              <li><a href="/admin/logout">Logout</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- RIGHT CONTENT -->
+        <div class="col-md-9">
+          <div class="dash-right">
+
+            <div class="dash-header d-flex justify-content-between align-items-center">
+              <h2>View Blog</h2>
+              <a href="/admin/blogdisplay" class="btn btn-secondary">
+                Back
+              </a>
+            </div>
+
+            <hr>
+
+            <table class="table table-bordered">
+              <tr>
+                <th width="25%">Title</th>
+                <td><%= blogview.title %></td>
+              </tr>
+
+              <tr>
+                <th>Description</th>
+                <td><%= blogview.description %></td>
+              </tr>
+
+              <tr>
+                <th>Image</th>
+                <td>
+                  <img
+                    src="<%= blogview.image.url %>"
+                    alt="Blog Image"
+                    width="150"
+                    style="border-radius:5px;"
+                  />
+                </td>
+              </tr>
+
+              <tr>
+                <th>Created At</th>
+                <td><%= blogview.createdAt.toDateString() %></td>
+              </tr>
+            </table>
+
+            <div class="mt-3">
+              <a
+                href="/admin/blogedit/<%= blogview._id %>"
+                class="btn btn-primary"
+              >
+                Edit Blog
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('../../footer.ejs') %>

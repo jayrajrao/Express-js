@@ -1,0 +1,80 @@
+<%- include('./../views/header.ejs') %>
+
+
+
+<!-- ================= BLOG HERO ================= -->
+<section class="blog-hero">
+  <div class="container text-center">
+    <span class="blog-hero-badge">📝 Blog Articles</span>
+    <h1 class="blog-hero-title">All Blog Posts</h1>
+    <p class="blog-hero-subtitle">
+      Tutorials, backend concepts, and real-world project writeups
+    </p>
+  </div>
+</section>
+
+<!-- ================= BLOG LIST ================= -->
+<section class="py-5 bg-white">
+  <div class="container">
+
+    <% if (d.length === 0) { %>
+      <p class="text-center text-muted">No blogs available</p>
+    <% } %>
+
+    <div class="row">
+      <% d.forEach((item)=>{ %>
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="blog-card card h-100 border-0">
+
+            <!-- Image -->
+            <a href="/blogdetail/<%= item._id %>">
+              <img
+                src="<%= item.image.url %>"
+                class="card-img-top"
+                alt="<%= item.title %>"
+              >
+            </a>
+
+            <!-- Content -->
+            <div class="card-body">
+              <h5 class="card-title">
+                <a
+                  href="/blogdetail/<%= item._id %>"
+                  class="text-decoration-none text-dark"
+                >
+                  <%= item.title %>
+                </a>
+              </h5>
+
+              <p class="card-text">
+                <%= item.description.slice(0,120) %>...
+              </p>
+            </div>
+
+            <!-- Footer -->
+            <div class="card-footer bg-white border-0 d-flex justify-content-between align-items-center">
+              <small class="text-muted">
+                <i class="fa-regular fa-calendar"></i>
+                <%= item.createdAt?.toDateString() %>
+              </small>
+
+              <a
+                href="/blogdetail/<%= item._id %>"
+                class="btn btn-sm btn-outline-primary"
+              >
+                Read More
+              </a>
+            </div>
+
+          </div>
+        </div>
+      <% }) %>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+<%- include('footer.ejs') %>

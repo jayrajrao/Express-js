@@ -1,0 +1,167 @@
+<%- include('header.ejs') %>
+<!-- Reading Progress Bar -->
+<div id="reading-progress"></div>
+<!-- ================= BLOG DETAIL ================= -->
+<section class="blog-detail-section">
+  <div class="container">
+    <div class="row">
+
+      <!-- LEFT : BLOG CONTENT -->
+      <div class="col-lg-8">
+
+        <article class="blog-article">
+
+          <h1 class="blog-title"><%= r.title %></h1>
+        <div class="blog-meta mb-2">
+  <span class="text-muted">
+    <i class="fa-regular fa-clock"></i>
+    <%= readingTime %> min read
+  </span>
+</div>
+          <div class="blog-meta">
+            <span>By <strong>RSGiTECH</strong></span>
+            <span>•</span>
+            <span><%= r.createdAt.toDateString() %></span>
+          </div>
+
+          <div class="blog-image">
+            <img
+              src="<%= r.image.url %>"
+              alt="<%= r.title %>"
+            />
+          </div>
+
+          <div class="blog-content">
+            <p><%= r.description %></p>
+          </div>
+
+          <!-- ===== LIKE BUTTON ===== -->
+<form method="post" action="/blog/<%= r._id %>/like">
+  <button
+    class="btn btn-sm <%= isLiked ? 'btn-danger' : 'btn-outline-danger' %>"
+  >
+    <i class="fa-solid fa-heart"></i>
+    <%= isLiked ? 'Liked' : 'Like' %>
+    (<%= r.likes.length %>)
+  </button>
+</form>
+
+<hr>
+<div class="d-flex gap-2 mt-3 flex-wrap">
+
+  <!-- Copy Link -->
+  <button
+    class="btn btn-outline-secondary btn-sm"
+    onclick="navigator.clipboard.writeText('<%= shareUrl %>')"
+  >
+    <i class="fa-solid fa-link"></i> Copy Link
+  </button>
+
+  <!-- WhatsApp -->
+  <a
+    href="https://wa.me/?text=<%= encodeURIComponent(r.title + ' - ' + shareUrl) %>"
+    target="_blank"
+    class="btn btn-outline-success btn-sm"
+  >
+    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+  </a>
+
+  <!-- Twitter / X -->
+  <a
+    href="https://twitter.com/intent/tweet?text=<%= encodeURIComponent(r.title) %>&url=<%= shareUrl %>"
+    target="_blank"
+    class="btn btn-outline-dark btn-sm"
+  >
+    <i class="fa-brands fa-x-twitter"></i> Tweet
+  </a>
+
+</div>
+
+<!-- ===== COMMENTS SECTION ===== -->
+<h4 class="mb-3">Comments</h4>
+
+<% if (r.comments.length === 0) { %>
+  <p class="text-muted">No comments yet</p>
+<% } %>
+
+<% r.comments.forEach(c => { %>
+  <div class="mb-3">
+    <strong><%= c.user?.name || "User" %></strong>
+    <p class="mb-1"><%= c.text %></p>
+    <small class="text-muted">
+      <%= new Date(c.createdAt).toDateString() %>
+    </small>
+  </div>
+<% }) %>
+
+<% if (user) { %>
+  <form method="post" action="/blog/<%= r._id %>/comment">
+    <div class="mb-2">
+      <textarea
+        name="comment"
+        class="form-control"
+        placeholder="Write your comment..."
+        required
+      ></textarea>
+    </div>
+    <button class="btn btn-primary btn-sm">
+      Add Comment
+    </button>
+  </form>
+<% } else { %>
+  <p>
+   <a href="/user/login">Login to comment</a>
+  </p>
+<% } %>
+        </article>
+
+      </div>
+
+      <!-- RIGHT : SIDEBAR -->
+      <div class="col-lg-4">
+
+        <aside class="blog-sidebar">
+
+          <h4 class="sidebar-title">Recent Blogs</h4>
+
+          <% recentblog.forEach((item) => { %>
+            <a
+              href="/blogdetail/<%= item._id %>"
+              class="recent-post"
+            >
+              <img
+                src="<%= item.image.url %>"
+                alt="<%= item.title %>"
+              />
+
+              <div class="recent-post-info">
+                <h6><%= item.title %></h6>
+                <span><%= item.createdAt.toDateString() %></span>
+              </div>
+            </a>
+          <% }) %>
+
+        </aside>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<%- include('footer.ejs') %>
+
+
+
+<script>
+  window.addEventListener("scroll", () => {
+    const scrollTop = document.documentElement.scrollTop;
+    const scrollHeight =
+      document.documentElement.scrollHeight -
+      document.documentElement.clientHeight;
+
+    const progress = (scrollTop / scrollHeight) * 100;
+    document.getElementById("reading-progress").style.width =
+      progress + "%";
+  });
+</script>

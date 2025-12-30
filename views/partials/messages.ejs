@@ -1,0 +1,50 @@
+<% if (error && error.length > 0) { %>
+  <div style="
+    position: fixed;
+    top: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: red;
+    color: white;
+    padding: 15px 25px;
+    z-index: 9999;
+    font-weight: bold;
+    border-radius: 5px;
+  ">
+    ❌ <%= error[0] %>
+  </div>
+<% } %>
+
+<% if (success && success.length > 0) { %>
+  <div style="
+    position: fixed;
+    top: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: green;
+    color: white;
+    padding: 15px 25px;
+    z-index: 9999;
+    font-weight: bold;
+    border-radius: 5px;
+  ">
+    ✅ <%= success[0] %>
+  </div>
+<% } %>
+
+<% if (info && info.length > 0) { %>
+  <div style="
+    position: fixed;
+    top: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: blue;
+    color: white;
+    padding: 15px 25px;
+    z-index: 9999;
+    font-weight: bold;
+    border-radius: 5px;
+  ">
+    ℹ️ <%= info[0] %>
+  </div>
+<% } %>

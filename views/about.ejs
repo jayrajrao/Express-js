@@ -1,0 +1,40 @@
+<%- include('header.ejs') %>
+
+<!-- ================= ABOUT HERO ================= -->
+<section class="about-hero">
+  <div class="container text-center">
+    <span class="about-badge">📘 About This Project</span>
+    <h1 class="about-title">A Practical Tech Blog Platform</h1>
+    <p class="about-subtitle">
+      Built to share real-world backend knowledge, development experience,
+      and interview-focused learning.
+    </p>
+  </div>
+</section>
+
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+
+        <div class="card border-0 shadow-sm rounded-4 p-4">
+          <h1 class="fw-bold mb-3">About This Blog</h1>
+
+          <% if (!about || !about.description) { %>
+            <p class="text-muted text-center">
+              About content not available.
+            </p>
+          <% } else { %>
+            <p class="text-muted" style="white-space: pre-line;">
+              <%= about.description %>
+            </p>
+          <% } %>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('footer.ejs') %>

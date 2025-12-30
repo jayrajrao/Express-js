@@ -1,0 +1,67 @@
+<%- include('../../header.ejs') %>
+
+<div class="container-fluid mt-5 pt-4">
+  <div class="row">
+
+    <!-- LEFT SIDEBAR -->
+    <div class="col-md-3">
+      <%- include('../../partials/sidebar') %>
+    </div>
+
+    <!-- RIGHT CONTENT -->
+    <div class="col-md-9">
+
+      <div class="card shadow-sm">
+        <div class="card-header">
+          <h5 class="mb-0">Category Details</h5>
+        </div>
+
+        <div class="card-body">
+
+          <div class="row">
+            <div class="col-md-4">
+              <% if (category.image && category.image.url) { %>
+                <img
+                  src="<%= category.image.url %>"
+                  class="img-fluid rounded border"
+                >
+              <% } else { %>
+                <p class="text-muted">No Image</p>
+              <% } %>
+            </div>
+
+            <div class="col-md-8">
+              <p>
+                <strong>Category Name:</strong><br>
+                <%= category.categoryname %>
+              </p>
+
+              <p>
+                <strong>Status:</strong><br>
+                <%= category.status || 'Active' %>
+              </p>
+
+              <a
+                href="/admin/categoryedit/<%= category._id %>"
+                class="btn btn-primary me-2"
+              >
+                Edit
+              </a>
+
+              <a
+                href="/admin/categorydisplay"
+                class="btn btn-secondary"
+              >
+                Back
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<%- include('../../footer.ejs') %>

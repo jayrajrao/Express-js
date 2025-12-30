@@ -1,0 +1,90 @@
+<%- include ('../../header.ejs') %>
+<%- include('../../partials/messages.ejs') %>
+  
+
+<div class="container-fluid mt-5 pt-4">
+  <div class="row">
+
+    <!-- LEFT SIDEBAR -->
+    <div class="col-md-3">
+      <%- include('../../partials/sidebar') %>
+    </div>
+
+    <!-- RIGHT CONTENT -->
+    <div class="col-md-9">
+
+      <div class="card shadow-sm">
+        <div class="card-header">
+          <h5 class="mb-0">Edit Category</h5>
+        </div>
+
+        <form
+          method="post"
+          action="/admin/categoryupdate/<%= categoryedit._id %>"
+          enctype="multipart/form-data"
+        >
+          <div class="card-body">
+
+            <!-- CURRENT IMAGE -->
+            <div class="mb-3">
+              <label class="form-label">Current Image</label><br>
+              <% if (categoryedit.image && categoryedit.image.url) { %>
+                <img
+                  src="<%= categoryedit.image.url %>"
+                  style="width:120px"
+                  class="img-thumbnail"
+                >
+              <% } else { %>
+                <span class="text-muted">No image</span>
+              <% } %>
+            </div>
+
+            <!-- NEW IMAGE -->
+            <div class="mb-3">
+              <label class="form-label">Update Image</label>
+              <input
+                type="file"
+                name="image"
+                class="form-control"
+                accept="image/*"
+              >
+            </div>
+
+            <!-- CATEGORY NAME -->
+            <div class="mb-3">
+              <label class="form-label">Category Title *</label>
+              <input
+                type="text"
+                name="categoryname"
+                class="form-control"
+                value="<%= categoryedit.categoryname %>"
+                required
+              >
+            </div>
+
+          </div>
+
+          <div class="card-footer text-end">
+            <a
+              href="/admin/categorydisplay"
+              class="btn btn-secondary"
+            >
+              Cancel
+            </a>
+
+            <button type="submit" class="btn btn-primary">
+              Update
+            </button>
+          </div>
+        </form>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+    <%- include ('../../footer.ejs') %>

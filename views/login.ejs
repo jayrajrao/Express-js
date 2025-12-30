@@ -1,0 +1,62 @@
+<%- include('header.ejs') %>
+<%- include('./partials/messages.ejs') %>
+
+<!-- ================= LOGIN HERO ================= -->
+<section class="login-hero">
+  <div class="container text-center">
+    <span class="login-badge">🔐 Admin Access</span>
+    <h1 class="login-title">Administrator Login</h1>
+    <p class="login-subtitle">
+      Secure access to manage blogs, content and settings
+    </p>
+  </div>
+</section>
+
+<!-- ================= LOGIN FORM ================= -->
+<section class="py-5 bg-white">
+  <div class="container">
+    <div class="row justify-content-center">
+
+      <div class="col-md-6 col-lg-5">
+        <div class="login-card">
+
+          <form action="/verifylogin" method="post">
+
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input
+                type="email"
+                name="email"
+                class="form-control"
+                placeholder="admin@example.com"
+                required
+              />
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label">Password</label>
+              <input
+                type="password"
+                name="password"
+                class="form-control"
+                placeholder="Enter your password"
+                required
+              />
+            </div>
+
+            <div class="d-grid">
+              <button type="submit" class="btn btn-primary btn-lg">
+                Log In
+              </button>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<%- include('footer.ejs') %>

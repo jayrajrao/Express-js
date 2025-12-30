@@ -1,0 +1,179 @@
+<%- include('../../header.ejs') %>
+<%- include('../../partials/messages.ejs') %>
+
+<div class="container-fluid mt-5 pt-4">
+  <div class="row">
+
+    <!-- LEFT SIDEBAR -->
+    <div class="col-md-3">
+      <%- include('../../partials/sidebar') %>
+    </div>
+
+    <!-- RIGHT CONTENT -->
+    <div class="col-md-9">
+
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="mb-0">Blogs</h4>
+
+        <!-- ADD BLOG BUTTON (Bootstrap 5) -->
+        <button
+          type="button"
+          class="btn btn-success"
+          data-bs-toggle="modal"
+          data-bs-target="#addBlogModal"
+        >
+          + Add Blog
+        </button>
+      </div>
+
+      <div class="card shadow-sm">
+        <div class="card-body p-0">
+
+          <table class="table table-bordered table-hover mb-0 align-middle">
+            <thead class="table-light">
+              <tr>
+                <th width="60">#</th>
+                <th width="120">Image</th>
+                <th>Title</th>
+                <th width="150">Action</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% if (blogs.length === 0) { %>
+                <tr>
+                  <td colspan="4" class="text-center text-muted">
+                    No blogs found
+                  </td>
+                </tr>
+              <% } %>
+
+              <% blogs.forEach((b, index) => { %>
+                <tr>
+                  <td><%= index + 1 %></td>
+
+                  <td>
+                    <% if (b.image && b.image.url) { %>
+                      <img
+                        src="<%= b.image.url %>"
+                        class="img-thumbnail"
+                        style="width:80px;"
+                      >
+                    <% } else { %>
+                      <span class="text-danger">No Image</span>
+                    <% } %>
+                  </td>
+
+                  <td><strong><%= b.title %></strong></td>
+
+                  <td>
+                    <a
+                      href="/admin/blogedit/<%= b._id %>"
+                      class="btn btn-sm btn-primary me-1"
+                    >
+                      Edit
+                    </a>
+
+                    <a
+                      href="/admin/blogdelete/<%= b._id %>"
+                      class="btn btn-sm btn-danger"
+                      onclick="return confirm('Are you sure you want to delete this blog?')"
+                    >
+                      Delete
+                    </a>
+                  </td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<!-- ADD BLOG MODAL (Bootstrap 5) -->
+<div class="modal fade" id="addBlogModal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Add Blog</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <form
+        method="post"
+        action="/admin/bloginsert"
+        enctype="multipart/form-data"
+      >
+        <div class="modal-body">
+
+          <div class="mb-3">
+            <label class="form-label">Blog Image *</label>
+            <input
+              type="file"
+              name="image"
+              class="form-control"
+              accept="image/*"
+              required
+            >
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Title *</label>
+            <input
+              type="text"
+              name="title"
+              class="form-control"
+              required
+            >
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Description *</label>
+            <textarea
+              name="description"
+              rows="4"
+              class="form-control"
+              required
+            ></textarea>
+          </div>
+<div class="mb-3">
+  <label class="form-label">Category *</label>
+  <select name="category" class="form-select" required>
+    <option value="">-- Select Category --</option>
+
+    <% categories.forEach(cat => { %>
+      <option value="<%= cat._id %>">
+        <%= cat.categoryname %>
+      </option>
+    <% }) %>
+  </select>
+</div>
+
+        </div>
+
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Cancel
+          </button>
+          <button type="submit" class="btn btn-success">
+            Save
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<%- include('../../footer.ejs') %>

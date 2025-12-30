@@ -1,0 +1,58 @@
+<%- include('../../header.ejs') %>
+<%- include('../../partials/messages.ejs') %>
+
+<div class="container-fluid mt-5 pt-4">
+  <div class="row">
+
+    <!-- LEFT SIDEBAR -->
+    <div class="col-md-3">
+      <%- include('../../partials/sidebar') %>
+    </div>
+
+    <!-- RIGHT CONTENT -->
+    <div class="col-md-9">
+
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-dark text-white">
+          <h5 class="mb-0">Edit About Us</h5>
+        </div>
+
+        <div class="card-body">
+
+          <form
+            method="POST"
+            action="/admin/aboutupdate/<%= aboutedit._id %>"
+          >
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">
+                Description <span class="text-danger">*</span>
+              </label>
+
+              <textarea
+                name="description"
+                rows="6"
+                class="form-control"
+                required
+              ><%= aboutedit.description %></textarea>
+            </div>
+
+            <div class="text-end">
+              <button type="submit" class="btn btn-primary">
+                Update
+              </button>
+              <a href="/admin/aboutus" class="btn btn-secondary ms-2">
+                Cancel
+              </a>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<%- include('../../footer.ejs') %>

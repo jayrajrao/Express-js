@@ -1,0 +1,203 @@
+<%- include('./header.ejs') %>
+
+<!-- ================= HERO SECTION ================= -->
+
+<section class="hero-section text-white">
+  <div class="container">
+    <div class="row align-items-center">
+
+      <div class="col-md-6">
+        <span class="badge bg-light text-dark mb-3">
+          🚀 Backend • Node • MongoDB
+        </span>
+
+        <h1 class="fw-bold display-5 mt-3">
+          Welcome to My Tech Blog
+        </h1>
+
+        <p class="lead mt-3 text-light">
+          Practical articles on backend development, system design
+          and real-world projects.
+        </p>
+
+        <div class="mt-4">
+          <a href="/blog" class="btn btn-warning btn-lg me-3">
+            Explore Blogs
+          </a>
+          <a href="/contact" class="btn btn-outline-light btn-lg">
+            Contact
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-6 text-center">
+        <img
+          src="/images/s-tsuchiya-2UpH_leC9vc-unsplash.jpg"
+          class="img-fluid hero-img"
+          alt="Blog Hero"
+        />
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ================= CATEGORIES ================= -->
+<!-- ================= CATEGORIES ================= -->
+<section class="py-4 bg-light border-bottom">
+  <div class="container">
+
+  <div class="text-center mb-4">
+  <h4 class="fw-bold category-title">
+    Browse by Category
+  </h4>
+  <p class="text-muted small mb-0">
+    Explore news by your interests
+  </p>
+</div>
+
+    <div class="d-flex flex-wrap gap-3 justify-content-center category-wrapper">
+
+      <% categories.forEach(cat => { %>
+        <a
+          href="/blog/category/<%= cat._id %>"
+          class="category-pill"
+        >
+          <%= cat.categoryname %>
+        </a>
+      <% }) %>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ================= RECENT BLOGS ================= -->
+<section class="py-5 bg-light">
+  <div class="container">
+
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Recent Blogs</h2>
+      <p class="text-muted">
+        Freshly written articles from the blog
+      </p>
+    </div>
+
+    <div class="row">
+      <% if (d.length === 0) { %>
+        <p class="text-center">No blogs found</p>
+      <% } %>
+
+      <% d.forEach((item)=>{ %>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 border-0 shadow-sm">
+
+            <!-- Blog Image -->
+            <a href="/blogdetail/<%= item._id %>">
+              <img
+                src="<%= item.image.url %>"
+                class="card-img-top"
+                style="height:200px;object-fit:cover"
+                alt="<%= item.title %>"
+              >
+            </a>
+
+            <!-- Blog Content -->
+            <div class="card-body">
+              <h5 class="card-title">
+                <a
+                  href="/blogdetail/<%= item._id %>"
+                  class="text-decoration-none text-dark"
+                >
+                  <%= item.title %>
+                </a>
+              </h5>
+
+              <p class="card-text text-muted">
+                <%= item.description.slice(0,100) %>...
+              </p>
+            </div>
+
+            <!-- Meta -->
+            <div class="card-footer bg-white border-0 d-flex justify-content-between align-items-center">
+              <small class="text-muted">
+                <i class="fa-regular fa-calendar"></i>
+                <%= item.createdAt?.toDateString() %>
+              </small>
+
+              <a
+                href="/blogdetail/<%= item._id %>"
+                class="btn btn-sm btn-primary"
+              >
+                Read More
+              </a>
+            </div>
+
+          </div>
+        </div>
+      <% }) %>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= WHY THIS BLOG ================= -->
+<section class="py-5 bg-white border-top">
+  <div class="container">
+
+    <div class="row text-center mb-4">
+      <h2 class="fw-bold">Why Read This Blog?</h2>
+      <p class="text-muted">
+        Built from real backend experience, not theory
+      </p>
+    </div>
+
+    <div class="row text-center">
+      <div class="col-md-4">
+        <h5>⚙ Real Projects</h5>
+        <p class="text-muted">
+          Code from real Node & MongoDB projects
+        </p>
+      </div>
+
+      <div class="col-md-4">
+        <h5>📈 Interview Ready</h5>
+        <p class="text-muted">
+          Concepts explained from interview perspective
+        </p>
+      </div>
+
+      <div class="col-md-4">
+        <h5>🧠 Deep Concepts</h5>
+        <p class="text-muted">
+          Async, performance, architecture explained simply
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+<!-- ================= CTA SECTION ================= -->
+<section class="py-5 text-center bg-white border-top">
+  <div class="container">
+    <h3 class="fw-bold">Want to read more?</h3>
+    <p class="text-muted mb-4">
+      Explore all articles and stay updated with new content
+    </p>
+    <a href="/blog" class="btn btn-primary btn-lg">
+      View All Blogs
+    </a>
+  </div>
+</section>
+
+
+
+
+  
+  <%- include('./footer.ejs') %>
+
+	

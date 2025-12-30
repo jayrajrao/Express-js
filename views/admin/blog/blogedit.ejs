@@ -1,0 +1,97 @@
+<%- include('../../header.ejs') %>
+<%- include('../../partials/messages.ejs') %>
+
+<link
+  rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+/>
+
+<section class="dashboard-wrap mtb-40" style="padding-top:125px;">
+  <div class="container">
+    <div class="row">
+
+      <!-- LEFT SIDEBAR -->
+      <div class="col-md-3">
+        <ul class="list-group">
+          <li class="list-group-item"><a href="/admin/dashboard">Dashboard</a></li>
+          <li class="list-group-item active"><a href="/admin/blogdisplay">Blogs</a></li>
+          <li class="list-group-item"><a href="/admin/categorydisplay">Categories</a></li>
+          <li class="list-group-item"><a href="/admin/contactview">Contact</a></li>
+          <li class="list-group-item"><a href="/admin/aboutus">About</a></li>
+          <li class="list-group-item"><a href="/admin/logout">Logout</a></li>
+        </ul>
+      </div>
+
+      <!-- RIGHT CONTENT -->
+      <div class="col-md-9">
+
+        <h2>Edit Blog</h2>
+        <hr>
+
+        <form
+          method="post"
+          action="/admin/blogupdate/<%= blog._id %>"
+          enctype="multipart/form-data"
+        >
+
+          <!-- TITLE -->
+          <div class="form-group">
+            <label>Title</label>
+            <input
+              type="text"
+              name="title"
+              value="<%= blog.title %>"
+              class="form-control"
+              required
+            />
+          </div>
+
+          <!-- DESCRIPTION -->
+          <div class="form-group">
+            <label>Description</label>
+            <textarea
+              name="description"
+              rows="5"
+              class="form-control"
+              required
+            ><%= blog.description %></textarea>
+          </div>
+
+          <!-- IMAGE -->
+          <div class="form-group">
+            <label>Current Image</label><br>
+
+            <% if (blog.image && blog.image.url) { %>
+              <img
+                src="<%= blog.image.url %>"
+                width="100"
+                style="margin-bottom:10px;"
+              />
+            <% } %>
+
+            <input type="file" name="image" class="form-control">
+            <small class="text-muted">
+              Leave empty to keep existing image
+            </small>
+          </div>
+
+          <!-- BUTTONS -->
+          <button type="submit" class="btn btn-primary">
+            Update Blog
+          </button>
+
+          <a href="/admin/blogdisplay" class="btn btn-default">
+            Cancel
+          </a>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<%- include('../../footer.ejs') %>

@@ -19,50 +19,47 @@ const port = process.env.PORT || 3002;
 connectDB();
 
 /* =======================
-   SECURITY (CSP FIXED 🔥)
+   SECURITY (FINAL CSP FIX ✅)
 ======================= */
 app.use(
   helmet({
+    crossOriginResourcePolicy: { policy: "cross-origin" }, // 🔥 IMPORTANT for Cloudinary
     contentSecurityPolicy: {
       directives: {
         defaultSrc: ["'self'"],
 
-        // ✅ Allow Bootstrap CDN JS
         scriptSrc: [
           "'self'",
           "'unsafe-inline'",
           "'unsafe-eval'",
           "https://cdn.jsdelivr.net",
-           "https://code.jquery.com",
-        "https://maxcdn.bootstrapcdn.com",
+          "https://code.jquery.com",
+          "https://maxcdn.bootstrapcdn.com",
         ],
 
-        // ✅ Allow Bootstrap CDN CSS
         styleSrc: [
           "'self'",
           "'unsafe-inline'",
           "https://cdn.jsdelivr.net",
-          "https://cdnjs.cloudflare.com", // 🔥 ADD THIS
+          "https://cdnjs.cloudflare.com",
         ],
 
-        // ✅ Images (Cloudinary + local)
-  
-imgSrc: [
-  "'self'",
-  "data:",
-  "blob:",
-  "https:",
-],
+        imgSrc: [
+          "'self'",
+          "data:",
+          "blob:",
+          "https:",
+        ],
 
-        // ✅ External connections (Cloudinary + CDN)
         connectSrc: [
           "'self'",
-          "https://res.cloudinary.com",
-          "https://cdn.jsdelivr.net",
+          "https:",
         ],
 
-        // ✅ Fonts (Font Awesome)
-        fontSrc: ["'self'", "https://cdnjs.cloudflare.com"],
+        fontSrc: [
+          "'self'",
+          "https://cdnjs.cloudflare.com",
+        ],
       },
     },
   })
@@ -128,9 +125,7 @@ app.use((req, res, next) => {
   res.locals.metaDescription =
     "A modern tech blog built with Node.js and Express";
   res.locals.metaImage = "";
-  res.locals.shareUrl = `${req.protocol}://${req.get("host")}${
-    req.originalUrl
-  }`;
+  res.locals.shareUrl = `${req.protocol}://${req.get("host")}${req.originalUrl}`;
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
   res.locals.info = req.flash("info");
@@ -145,6 +140,7 @@ app.use((req, res, next) => {
 app.use("/", require("./routes/frontRoutes"));
 app.use("/admin", require("./routes/adminRoutes"));
 app.use("/user", require("./routes/userRoutes"));
+
 /* =======================
    404 HANDLER
 ======================= */

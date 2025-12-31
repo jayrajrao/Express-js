@@ -46,7 +46,13 @@ app.use(
         ],
 
         // ✅ Images (Cloudinary + local)
-        imgSrc: ["'self'", "data:", "https://res.cloudinary.com"],
+       imgSrc: [
+  "'self'",
+  "data:",
+  "blob:",
+  "https://res.cloudinary.com",
+  "https://*.cloudinary.com"
+],
 
         // ✅ External connections (Cloudinary + CDN)
         connectSrc: [

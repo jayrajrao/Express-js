@@ -23,7 +23,8 @@ connectDB();
 ======================= */
 app.use(
   helmet({
-    crossOriginResourcePolicy: { policy: "cross-origin" }, // 🔥 IMPORTANT for Cloudinary
+    crossOriginResourcePolicy: { policy: "cross-origin" },
+
     contentSecurityPolicy: {
       directives: {
         defaultSrc: ["'self'"],
@@ -48,7 +49,7 @@ app.use(
           "'self'",
           "data:",
           "blob:",
-          "https:",
+          "https:",          // 🔥 THIS FIXES HTTP/HTTPS MIX
         ],
 
         connectSrc: [
@@ -64,6 +65,8 @@ app.use(
     },
   })
 );
+
+
 
 app.disable("x-powered-by");
 

@@ -11,7 +11,7 @@ const MongoStore = require("connect-mongo");
 const connectDB = require("./DB/connectdb");
 
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
 /* =======================
    DB CONNECTION
@@ -19,7 +19,7 @@ const port = process.env.PORT;
 connectDB();
 
 /* =======================
-   SECURITY (FINAL CSP FIX ✅)
+   SECURITY (HELMET – SAFE)
 ======================= */
 app.use(
   helmet({
@@ -49,24 +49,16 @@ app.use(
           "'self'",
           "data:",
           "blob:",
-          "https:",          // 🔥 THIS FIXES HTTP/HTTPS MIX
-        ],
-
-        connectSrc: [
-          "'self'",
           "https:",
         ],
 
-        fontSrc: [
-          "'self'",
-          "https://cdnjs.cloudflare.com",
-        ],
+        connectSrc: ["'self'", "https:"],
+
+        fontSrc: ["'self'", "https://cdnjs.cloudflare.com"],
       },
     },
   })
 );
-
-
 
 app.disable("x-powered-by");
 
@@ -112,7 +104,7 @@ app.use(
     cookie: {
       httpOnly: true,
       sameSite: "lax",
-      secure: false,
+      secure: false, // Render HTTPS handled outside
       maxAge: 1000 * 60 * 60 * 2,
     },
   })
@@ -123,19 +115,25 @@ app.use(
 ======================= */
 app.use(flash());
 
-// app.use((req, res, next) => {
-//   res.locals.metaTitle = "MyBlog";
-//   res.locals.metaDescription =
-//     "A modern tech blog built with Node.js and Express";
-//   res.locals.metaImage = "";
-//   res.locals.shareUrl = `${req.protocol}://${req.get("host")}${req.originalUrl}`;
-//   res.locals.success = req.flash("success");
-//   res.locals.error = req.flash("error");
-//   res.locals.info = req.flash("info");
-//   res.locals.user = req.session.user || null;
-//   res.locals.admin = req.session.admin || null;
-//   next();
-// });
+/* =======================
+   GLOBAL LOCALS (🔥 FIX)
+======================= */
+app.use((req, res, next) => {
+  res.locals.metaTitle = "ArticleFlow";
+  res.locals.metaDescription =
+    "A modern tech blog built with Node.js and Express";
+  res.locals.metaImage = "";
+  res.locals.shareUrl = `${req.protocol}://${req.get("host")}${req.originalUrl}`;
+
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+  res.locals.info = req.flash("info");
+
+  res.locals.user = req.session.user || null;
+  res.locals.admin = req.session.admin || null;
+
+  next();
+});
 
 /* =======================
    ROUTES

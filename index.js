@@ -6,7 +6,6 @@ const bodyParser = require("body-parser");
 const fileupload = require("express-fileupload");
 const session = require("express-session");
 const flash = require("connect-flash");
-const helmet = require("helmet");
 const MongoStore = require("connect-mongo");
 const connectDB = require("./DB/connectdb");
 
@@ -17,48 +16,6 @@ const port = process.env.PORT || 3000;
    DB CONNECTION
 ======================= */
 connectDB();
-
-/* =======================
-   SECURITY (HELMET – SAFE)
-======================= */
-app.use(
-  helmet({
-    crossOriginResourcePolicy: { policy: "cross-origin" },
-
-    contentSecurityPolicy: {
-      directives: {
-        defaultSrc: ["'self'"],
-
-        scriptSrc: [
-          "'self'",
-          "'unsafe-inline'",
-          "'unsafe-eval'",
-          "https://cdn.jsdelivr.net",
-          "https://code.jquery.com",
-          "https://maxcdn.bootstrapcdn.com",
-        ],
-
-        styleSrc: [
-          "'self'",
-          "'unsafe-inline'",
-          "https://cdn.jsdelivr.net",
-          "https://cdnjs.cloudflare.com",
-        ],
-
-        imgSrc: [
-          "'self'",
-          "data:",
-          "blob:",
-          "https:",
-        ],
-
-        connectSrc: ["'self'", "https:"],
-
-        fontSrc: ["'self'", "https://cdnjs.cloudflare.com"],
-      },
-    },
-  })
-);
 
 app.disable("x-powered-by");
 
@@ -104,7 +61,7 @@ app.use(
     cookie: {
       httpOnly: true,
       sameSite: "lax",
-      secure: false, // Render HTTPS handled outside
+      secure: false,
       maxAge: 1000 * 60 * 60 * 2,
     },
   })
@@ -116,7 +73,7 @@ app.use(
 app.use(flash());
 
 /* =======================
-   GLOBAL LOCALS (🔥 FIX)
+   GLOBAL LOCALS
 ======================= */
 app.use((req, res, next) => {
   res.locals.metaTitle = "ArticleFlow";
